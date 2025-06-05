@@ -10,10 +10,10 @@ function App() {
           Jonas Levy Pereira Meneses
         </h1>
         <p>85 98630-9152 - 85 99267-2678 | jonaslevy0408@gmail.com </p>
-        <p className='flex text-center justify-center items-center gap-3'>
-          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaLinkedin /> Linkedin</a>
-          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaGithub /> Github</a>
-          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaNewspaper /> Lattes</a>
+        <p className='flex text-center justify-center items-center gap-3 '>
+          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaLinkedin className='text-sky-700' /> Linkedin</a>
+          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaGithub className='text-sky-700' /> Github</a>
+          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaNewspaper className='text-sky-700' /> Lattes</a>
         </p>
       </header>
       <section className='flex p-8 flex-col items-start border-b-2 border-gray-400'>
@@ -28,10 +28,9 @@ function App() {
           conhecimentos em SQL para manipulação de bancos de dados relacionais. Busco
           oportunidades para aplicar minhas habilidades em projetos reais e continuar aprendendo
           em um ambiente colaborativo e inovador.
-
         </p>
       </section>
-      <section className='flex p-8 flex-col items-start border-b-2 border-gray-400'>
+      <section className='flex p-8 flex-col items-start border-b-2 border-gray-400 w-full'>
         <h2 className="text-2xl  font-bold  text-sky-700 ">
           Objetivo
         </h2>
@@ -42,6 +41,74 @@ function App() {
           colaborativos e desafiadores que proporcionem aprendizado contínuo e crescimento
           profissional.
         </p>
+      </section>
+
+      <section className='flex p-8 flex-col items-start border-b-2 border-gray-400 w-full'>
+        <h2 className="text-2xl  font-bold  text-sky-700 ">
+          Formação Acadêmica
+        </h2>
+        <h3 className='font-bold'>
+          Análise e Desenvolvimento de Sistemas (Presencial):
+        </h3>
+        <p>UniAteneu – Fortaleza/CE</p>
+        <p>Início: agosto/2024 – Em andamento | Previsão de conclusão: dezembro/2026</p>
+      </section>
+
+      <section className='flex p-8 flex-col items-start border-b-2 border-gray-400 w-full text-left'>
+        <h2 className="text-2xl  font-bold  text-sky-700 ">
+          Cursos Relevantes
+        </h2>
+        <h3 className='font-bold'> Bootcamp Desenvolvedor Web Full Stack</h3>
+        <p>Labenu (fevereiro/2022 - fevereiro/2023)</p>
+        <p className='text-left'>
+          Programa com mais de 1000 horas de experiência prática em desenvolvimento
+          Full Stack, utilizando metodologias ágeis (Scrum e Kanban). Conteúdo abordado:
+        </p>
+        <ul className='text-left list-disc ml-7'>
+          <li>
+            Frontend: HTML, CSS, JavaScript, React, Styled-Components, React Hooks,
+            consumo de APIs REST, HTTP
+          </li>
+          <li>
+            Backend: Node.js, Knex, TypeScript, MySQL, SQL, Firebase
+          </li>
+          <li>
+            Ferramentas e Testes: Git, GitHub, AWS, Jest, testes unitários
+          </li>
+        </ul>
+      </section>
+
+      <section className='flex p-8 flex-col items-start border-b-2 border-gray-400 w-full text-left'>
+        <h2 className="text-2xl  font-bold  text-sky-700 ">
+          Competências Técnicas
+        </h2>
+        <p>
+          <span className='font-bold'>Linguagens de Programação: </span>
+          Pyton (Iniciante), JavaScript (Intermediário), TypeScript(Básico)
+
+        </p>
+      </section>
+      <section className='flex p-8 flex-col items-start border-b-2 border-gray-400 w-full'>
+        <h2 className="text-2xl  font-bold  text-sky-700 ">
+          Experiência Profissional
+        </h2>
+        <h3 className='font-bold'>MixTi Soluções Comerciais </h3>
+        <p>
+          Desenvolvedor web FullSatck (11/2022– 05/2023)
+        </p>
+        <ul className='text-left list-disc ml-7'>
+          <li>
+            Manutenção e desenvolvimento de novas aplicações web, incluindo plataformas
+            de delivery, dashboards e sistemas diversos.
+          </li>
+          <li>
+            Desenvolvimento de APIs para integração entre serviços e aplicações web
+          </li>
+          <li>
+            Implementação de novas funcionalidades, correção de bugs e otimização
+            de interfaces responsivas.
+          </li>
+        </ul>
       </section>
     </div>
   );
