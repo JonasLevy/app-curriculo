@@ -1,21 +1,11 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaNewspaper } from "react-icons/fa";
+import Cabecalho from './components/Cabecalho';
 
 
 function App() {
   return (
     <div className=" text-center  flex flex-col items-center">
-      <header className=" flex flex-col border-b-2 border-gray-400 p-7 w-full">
-        <h1 className="		text-4xl font-bold  text-sky-700 ms-0.5">
-          Jonas Levy Pereira Meneses
-        </h1>
-        <p>85 98630-9152 - 85 99267-2678 | jonaslevy0408@gmail.com </p>
-        <p className='flex text-center justify-center items-center gap-3 '>
-          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaLinkedin className='text-sky-700' /> Linkedin</a>
-          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaGithub className='text-sky-700' /> Github</a>
-          <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaNewspaper className='text-sky-700' /> Lattes</a>
-        </p>
-      </header>
+      <Cabecalho/>
       <section className='flex p-8 flex-col items-start border-b-2 border-gray-400'>
         <h2 className="text-2xl  font-bold  text-sky-700 ">
           Resumo Profissional
