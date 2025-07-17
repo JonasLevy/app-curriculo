@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaLinkedin, FaGithub, FaNewspaper } from "react-icons/fa";
 import Modal from "./Modal";
-import { TextField } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 
 
 const Cabecalho = () => {
@@ -47,9 +47,9 @@ const Cabecalho = () => {
                     </a>
                 }
             </p>
-            <button onClick={() => setModal(!modal)} className="bg-green-500 w-fit p-1 print:block">
+            <Button variant="contained" color="success" onClick={() => setModal(!modal)} className="self-center">
                 Alterar
-            </button>
+            </Button>
             {modal && <Modal close={() => setModal(!modal)}>
                 {Object.entries(formDados).map(([key, value]) => (
                     <TextField

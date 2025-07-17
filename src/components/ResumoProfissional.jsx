@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 const ResumoProfissional = () => {
     const [modal, setModal] = useState(false)
@@ -13,9 +13,9 @@ const ResumoProfissional = () => {
             <p className='text-left'>
                 {texto}
             </p>
-            <button onClick={() => setModal(!modal)} className="bg-green-500 w-fit p-1 print:block self-center">
+            <Button variant="contained" color="success" onClick={() => setModal(!modal)} className="self-center">
                 Alterar
-            </button>
+            </Button>
             {modal &&
                 <Modal close={() => setModal(!modal)}>
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
@@ -28,7 +28,7 @@ const ResumoProfissional = () => {
                         rows={10}
                         defaultValue="Default Value"
                         value={texto}
-                        onChange={(e)=>setTexto(e.target.value)}
+                        onChange={(e) => setTexto(e.target.value)}
                     />
                 </Modal>}
         </section>
