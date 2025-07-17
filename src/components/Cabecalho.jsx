@@ -1,25 +1,70 @@
 import React, { useState } from "react";
 import { FaLinkedin, FaGithub, FaNewspaper } from "react-icons/fa";
 import Modal from "./Modal";
+import { TextField } from "@mui/material"
 
 
 const Cabecalho = () => {
     const styleH1 = " flex flex-col border-b-2 border-gray-400 p-7 w-full items-center"
     const [modal, setModal] = useState(false)
-    const[nome, setnome] = useState("Digite Seu Nome")
+    const [formDados, setFormdados] = useState({
+        nome: "Digite seu Nome",
+        email: "seuEmail@gmail.com",
+        telefone: "8599999-9999",
+        github: "git",
+        linkedin: "Linkedin",
+        lattes: "Lattes"
+    })
+
+    const setDadosFormulario = (key, value) => {
+        const newObject = {
+            ...formDados,
+            [key]: value
+        }
+        setFormdados(newObject)
+    }
+
     return (
-        <header className={styleH1} > 
+        <header className={styleH1} >
             <h1 className="text-4xl font-bold  text-sky-700 ms-0.5">
-                {nome}
+                {formDados.nome}
             </h1>
-            <p>85 98630-9152 - 85 99267-2678 | jonaslevy0408@gmail.com </p>
+            <p>{formDados.telefone} | {formDados.email} </p>
             <p className='flex text-center justify-center items-center gap-3 '>
-                <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaLinkedin className='text-sky-700' /> Linkedin</a>
-                <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaGithub className='text-sky-700' /> Github</a>
-                <a href='https://www.google.com' target='_blank' className='flex items-center gap-1'><FaNewspaper className='text-sky-700' /> Lattes</a>
+                {formDados.linkedin &&
+                    <a href={formDados.linkedin} target='_blank' className='flex items-center gap-1'>
+                        <FaLinkedin className='text-sky-700' /> Linkedin
+                    </a>
+                }
+                {formDados.github &&
+                    <a href={formDados.github} target='_blank' className='flex items-center gap-1'>
+                        <FaGithub className='text-sky-700' /> Github
+                    </a>
+                }
+                {formDados &&
+                    <a href={formDados.lattes} target='_blank' className='flex items-center gap-1'>
+                        <FaNewspaper className='text-sky-700' /> Lattes
+                    </a>
+                }
             </p>
-            <button onClick={()=>setModal(!modal)} className="bg-green-500 w-fit p-1">Alterar</button>
-            {modal && <Modal close={()=>setModal(!modal)}/>}
+            <button onClick={() => setModal(!modal)} className="bg-green-500 w-fit p-1 print:block">
+                Alterar
+            </button>
+            {modal && <Modal close={() => setModal(!modal)}>
+                {Object.entries(formDados).map(([key, value]) => (
+                    <TextField
+                        id="outlined-basic"
+                        label={key}
+                        variant="outlined"
+                        key={key}
+                        type="text"
+                        value={value}
+                        onChange={(e) => setDadosFormulario(key, e.target.value)}
+                        placeholder={key}
+                        className="m-2"
+                    />
+                ))}
+            </Modal>}
         </header>
     )
 }
