@@ -3,18 +3,19 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
-export default function RadioButtonsGroup() {
+export default function RadioButtonsGroup({andamento, change}) {
   return (
     <FormControl>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue="Cursando"
         name="radio-buttons-group"
+        onChange={change}
+        value={andamento}
       >
-        <FormControlLabel value="Cursando" control={<Radio />} label="Cursando" />
-        <FormControlLabel value="Concluido" control={<Radio />} label="Concluido" />
+        <FormControlLabel value={false} control={<Radio />} label="Cursando" />
+        <FormControlLabel value={true} control={<Radio />} label="Concluido" />
       </RadioGroup>
     </FormControl>
   );
