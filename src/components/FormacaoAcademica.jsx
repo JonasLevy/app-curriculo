@@ -24,7 +24,7 @@ const FormacaoAcademica = () => {
         inicio: dayjs(),
         termino: dayjs(),
         concluido: false,
-        id:uuidv4()
+        id: uuidv4()
     }])
     const [novaFormacao, setNovaFormacao] = useState({
         curso: "",
@@ -33,8 +33,10 @@ const FormacaoAcademica = () => {
         inicio: dayjs(),
         termino: dayjs(),
         concluido: false,
-        id:""
+        id: ""
     })
+
+
     const mesesDoAno = [
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -68,7 +70,7 @@ const FormacaoAcademica = () => {
             inicio: "",
             termino: "",
             concluido: false,
-            id:""
+            id: ""
         })
         setDataInicio(dayjs())
         setDataTermino(dayjs())
@@ -81,16 +83,16 @@ const FormacaoAcademica = () => {
             inicio: dataInicio,
             termino: dataTermino,
             concluido: andamentoCurso,
-            id:uuidv4()
+            id: uuidv4()
         }])
         limparForm()
         setModalForm(false)
     }
 
-    const salvarAlteracao = (e) =>{
+    const salvarAlteracao = (e) => {
         e.preventDefault()
-        const arrayFormacoes = formacoes.map((formacao,i)=>{
-            if(formacao.id == novaFormacao.id){
+        const arrayFormacoes = formacoes.map((formacao, i) => {
+            if (formacao.id == novaFormacao.id) {
                 return novaFormacao
             }
             return formacao
@@ -100,13 +102,14 @@ const FormacaoAcademica = () => {
         console.log(formacoes)
     }
 
-    const apagarFormacao = (id) =>{
-        const novoArray = formacoes.filter(formacao=>{
+    const apagarFormacao = (id) => {
+        const novoArray = formacoes.filter(formacao => {
             return formacao.id != id
         })
-       setFormacoes(novoArray)
+        setFormacoes(novoArray)
     }
-
+    const bodyElement = document.body;
+    if(!modal) bodyElement.style.overflow=''
 
 
     return (
@@ -122,7 +125,7 @@ const FormacaoAcademica = () => {
                     <p>{formacao.instituicao} – {formacao.cidade}</p>
                     <p>
                         Início: {mesesDoAno[formacao.inicio.get('month')]}/{formacao.inicio.get('year')}
-                        {formacao.concluido ? " | Concluido:" : " Em andamento | Previsão de conclusão: "} 
+                        {formacao.concluido ? " | Concluido:" : " Em andamento | Previsão de conclusão: "}
                         {mesesDoAno[formacao.termino.get('month')]}/{formacao.termino.get('year')}
                     </p>
                 </div>
@@ -131,7 +134,7 @@ const FormacaoAcademica = () => {
                 Alterar
             </Button>
             {modal &&
-                <Modal close={() => setModal(!modal)}>
+                <Modal close={() => setModal(!modal)} blockScroll={modal}>
                     {formacoes && formacoes.map((formacao, i) => (
                         <div className="w-full flex flex-col items-start" key={i}>
                             <h3 className='font-bold'>
@@ -142,7 +145,7 @@ const FormacaoAcademica = () => {
                                 <IconButton aria-label="delete" onClick={() => ativarModalFormEditar(i)}>
                                     <EditIcon />
                                 </IconButton>
-                                <IconButton aria-label="delete" onClick={()=>apagarFormacao(formacao.id)}>
+                                <IconButton aria-label="delete" onClick={() => apagarFormacao(formacao.id)}>
                                     <DeleteIcon />
                                 </IconButton>
                             </div>
@@ -154,7 +157,7 @@ const FormacaoAcademica = () => {
                     </Button>
                 </Modal>}
             {modalForm &&
-                <ModalForm close={() => ativarModalForm()} acao={inserirNovaFormacao}>
+                <ModalForm close={() => ativarModalForm()} acao={inserirNovaFormacao} blockScroll={modalForm}>
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
                         Formação Acadêmica
                     </h2>
@@ -191,7 +194,7 @@ const FormacaoAcademica = () => {
                 </ModalForm>
             }
             {modalFormEditar &&
-                <ModalForm close={() => ativarModalFormEditar()} acao={salvarAlteracao}>
+                <ModalForm close={() => ativarModalFormEditar()} acao={salvarAlteracao}blockScroll={modalFormEditar}>
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
                         Formação Acadêmica
                     </h2>

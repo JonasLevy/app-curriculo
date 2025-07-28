@@ -24,6 +24,9 @@ const Cabecalho = () => {
         setFormdados(newObject)
     }
 
+    const bodyElement = document.body;
+    if(!modal) bodyElement.style.overflow=''
+
     return (
         <header className={styleH1} >
             <h1 className="text-4xl font-bold  text-sky-700 ms-0.5">
@@ -50,7 +53,7 @@ const Cabecalho = () => {
             <Button variant="contained" color="success" onClick={() => setModal(!modal)} className="self-center">
                 Alterar
             </Button>
-            {modal && <Modal close={() => setModal(!modal)}>
+            {modal && <Modal close={() => setModal(!modal)} blockScroll={modal}>
                 {Object.entries(formDados).map(([key, value]) => (
                     <TextField
                         id="outlined-basic"
