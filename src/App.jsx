@@ -3,6 +3,7 @@ import Cabecalho from './components/Cabecalho';
 import ResumoProfissional from './components/ResumoProfissional';
 import ObjetivoProfissional from './components/ObjetivoProfissional';
 import FormacaoAcademica from './components/FormacaoAcademica';
+import CursosRelevantes from './components/CursosRelevantes';
 
 
 function App() {
@@ -12,30 +13,8 @@ function App() {
       <ResumoProfissional />
       <ObjetivoProfissional />
       <FormacaoAcademica />
-
-      <section className='flex p-8 flex-col items-start border-b-2 border-gray-400 w-full text-left'>
-        <h2 className="text-2xl  font-bold  text-sky-700 ">
-          Cursos Relevantes
-        </h2>
-        <h3 className='font-bold'> Bootcamp Desenvolvedor Web Full Stack</h3>
-        <p>Labenu (fevereiro/2022 - fevereiro/2023)</p>
-        <p className='text-left'>
-          Programa com mais de 1000 horas de experiência prática em desenvolvimento
-          Full Stack, utilizando metodologias ágeis (Scrum e Kanban). Conteúdo abordado:
-        </p>
-        <ul className='text-left list-disc ml-7'>
-          <li>
-            Frontend: HTML, CSS, JavaScript, React, Styled-Components, React Hooks,
-            consumo de APIs REST, HTTP
-          </li>
-          <li>
-            Backend: Node.js, Knex, TypeScript, MySQL, SQL, Firebase
-          </li>
-          <li>
-            Ferramentas e Testes: Git, GitHub, AWS, Jest, testes unitários
-          </li>
-        </ul>
-      </section>
+      <CursosRelevantes/>
+      
 
       <section className='flex p-8 flex-col items-start border-b-2 border-gray-400 w-full text-left'>
         <h2 className="text-2xl  font-bold  text-sky-700 ">
