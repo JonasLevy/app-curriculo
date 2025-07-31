@@ -159,7 +159,7 @@ const FormacaoAcademica = () => {
             {modalForm &&
                 <ModalForm close={() => ativarModalForm()} acao={inserirNovaFormacao} blockScroll={modalForm}>
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
-                        Formação Acadêmica
+                       Adicionar Formação Acadêmica
                     </h2>
                     <TextField
                         id="curso"

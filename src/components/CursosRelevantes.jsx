@@ -1,10 +1,15 @@
-import { Button, IconButton } from "@mui/material"
+import { Box, Button, IconButton, TextField } from "@mui/material"
 import dayjs from "dayjs"
 import { useState } from "react"
 import Modal from "./Modal"
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
+import { v4 as uuidv4 } from 'uuid';
+import ModalForm from "./ModalForm";
+import { setDadosFormulario } from "../hooks/onChangeInputs";
+import BasicDatePicker from "./BasicDatePicker";
+import RadioButtonsGroup from "./RadioButtonsGroup";
 
 
 const CursosRelevantes = () => {
@@ -16,15 +21,23 @@ const CursosRelevantes = () => {
     const [andamentoCurso, setAndamentoCurso] = useState(false)
     const [listaCursos, setListaCursos] = useState([
         {
+            id: uuidv4(),
             nomeDoCurso: "Bootcamp Desenvolvedor Web Full Stack",
-            instituição: "Labenu",
-            Descricao: "Programa com mais de 1000 horas de experiência prática em desenvolvimento Full Stack, utilizando metodologias ágeis (Scrum e Kanban). Conteúdo abordado:",
+            instituicao: "Labenu",
+            descricao: "Programa com mais de 1000 horas de experiência prática em desenvolvimento Full Stack, utilizando metodologias ágeis (Scrum e Kanban). Conteúdo abordado:",
             conteudos: ["Frontend: HTML, CSS, JavaScript, React, Styled-Components, React Hooks, consumo de APIs REST, HTTP", "Backend: Node.js, Knex, TypeScript, MySQL, SQL, Firebase", "Ferramentas e Testes: Git, GitHub, AWS, Jest, testes unitários"],
             dataInicio: dayjs(),
             dataConclusao: dayjs()
 
         }
     ])
+    const [novoCurso, setNovoCurso] = useState({
+        id: '',
+        nomeDoCurso: "",
+        instituicao: "",
+        descricao: "",
+        conteudos: [],
+    })
 
     const mesesDoAno = [
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -32,6 +45,32 @@ const CursosRelevantes = () => {
     ];
     const bodyElement = document.body;
     if (!modalCursos) bodyElement.style.overflow = ''
+
+    const ativarDesativarModalAddCurso = () => {
+        setModalCursos(!modalCursos)
+        setModalFormAddCurso(!modalFormAddCurso)
+    }
+
+    const AdicionarNovoCurso = (e) => {
+        e.preventDefault()
+        setListaCursos([...listaCursos,
+        {
+            ...novoCurso,
+            id: uuidv4,
+            dataInicio: dataInicio,
+            dataConclusao: dataTermino,
+        }])
+        setNovoCurso({
+            id: '',
+            nomeDoCurso: "",
+            instituicao: "",
+            descricao: "",
+            conteudos: [],
+        })
+        setDataInicio(dayjs())
+        setDataTermino(dayjs())
+        ativarDesativarModalAddCurso()
+    }
 
 
     return (
@@ -44,12 +83,12 @@ const CursosRelevantes = () => {
                 listaCursos?.map((curso, i) => (
                     <div className="w-full flex flex-col items-start" key={i}>
                         <h3 className='font-bold'>{curso.nomeDoCurso}</h3>
-                        <p>{curso.instituição}
+                        <p>{curso.instituicao}
                             ({mesesDoAno[(curso.dataInicio).get("month")]}/{(curso.dataInicio).get("year")} -
                             {mesesDoAno[(curso.dataConclusao).get("month")]}/{(curso.dataConclusao).get("year")})
                         </p>
                         <p className='text-left'>
-                            {curso.Descricao}. Conteúdo abordado:
+                            {curso.descricao}. Conteúdo abordado:
                         </p>
                         <ul className='text-left list-disc ml-7'>
                             {
@@ -80,7 +119,7 @@ const CursosRelevantes = () => {
                                 <h3 className='font-bold'>{curso.nomeDoCurso}</h3>
                                 <p>{curso.instituição}</p>
                                 <div className="w-full flex ">
-                                    <IconButton aria-label="delete" >
+                                    <IconButton aria-label="delete" onClick={ativarDesativarModalAddCurso}>
                                         <EditIcon />
                                     </IconButton>
                                     <IconButton aria-label="delete" >
@@ -92,6 +131,44 @@ const CursosRelevantes = () => {
                         ))
                     }
                 </Modal>
+            }
+            {
+                modalFormAddCurso &&
+                <ModalForm close={ativarDesativarModalAddCurso} acao={AdicionarNovoCurso} blockScroll={modalFormAddCurso}>
+                    <h2 className="text-2xl  font-bold  text-sky-700 ">
+                        Adicionar Cursos
+                    </h2>
+                    <TextField
+                        id="curso"
+                        label="Curso"
+                        variant="outlined"
+                        value={novoCurso.nomeDoCurso}
+                        onChange={(e) => setDadosFormulario('nomeDoCurso', e.target.value, setNovoCurso, novoCurso)}
+                    />
+                    <TextField
+                        id="instituicao"
+                        label="Instituição"
+                        variant="outlined"
+                        value={novoCurso.instituicao}
+                        onChange={(e) => setDadosFormulario('instituicao', e.target.value, setNovoCurso, novoCurso)}
+                    />
+                    <TextField
+                        id="descricao"
+                        label="Descricao"
+                        variant="outlined"
+                        value={novoCurso.cidade}
+                        onChange={(e) => setDadosFormulario('descricao', e.target.value, setNovoCurso, novoCurso)}
+                    />
+                    <Box >
+                        <BasicDatePicker
+                            valorInicio={dataInicio}
+                            valorTermino={dataTermino}
+                            changeInicio={(newValue) => setDataInicio(newValue)}
+                            changeTermino={(newValue) => setDataTermino(newValue)}
+                        />
+                    </Box>
+                    <RadioButtonsGroup andamento={andamentoCurso} change={() => setAndamentoCurso(!andamentoCurso)} />
+                </ModalForm>
             }
         </section>
     )

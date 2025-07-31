@@ -15,7 +15,11 @@ const ObjetivoProfissional = () => {
             <p className='text-left'>
                 {texto}
             </p>
-            <Button variant="contained" color="success" onClick={() => setModal(!modal)} className="self-center">
+            <Button
+                variant="contained"
+                color="success"
+                onClick={() => setModal(!modal)}
+                className="self-center hide-on-print">
                 Alterar
             </Button>
             {modal &&
