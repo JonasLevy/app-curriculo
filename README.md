@@ -1,5 +1,7 @@
 # Gerador de Currículo
 
+[![Deployment](https://img.shields.io/badge/Deployment-Vercel-black?style=for-the-badge&logo=vercel)](https://app-curriculo-orpin.vercel.app/)
+
 ## Descrição do Projeto
 
 Este é um aplicativo web interativo, construído com **React** e **Vite**, projetado para ajudar os usuários a criar currículos profissionais de forma rápida e intuitiva. O aplicativo permite que você insira informações pessoais, experiências profissionais, educação e habilidades, gerando um currículo formatado e pronto para download.
@@ -39,8 +41,7 @@ Certifique-se de ter o **Node.js** e o **npm** (ou **yarn**) instalados.
 ### 1. Clonar o Repositório
 
 ```
-git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
-cd seu-repositorio
+git clone [https://github.com/JonasLevy/app-curriculo.git]
 ```
 
 ### 2. Instalar as Dependências
