@@ -117,7 +117,7 @@ const FormacaoAcademica = () => {
             <h2 className="text-2xl  font-bold  text-sky-700 ">
                 Formação Acadêmica
             </h2>
-            {formacoes && formacoes.map((formacao, i) => (
+            {formacoes?.map((formacao, i) => (
                 <div className="w-full flex flex-col items-start" key={i}>
                     <h3 className='font-bold'>
                         {formacao.curso}:

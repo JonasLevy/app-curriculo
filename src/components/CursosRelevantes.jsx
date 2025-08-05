@@ -51,7 +51,7 @@ const CursosRelevantes = () => {
         setModalFormAddCurso(!modalFormAddCurso)
     }
 
-    const AdicionarNovoCurso = (e) => {
+    const adicionarNovoCurso = (e) => {
         e.preventDefault()
         setListaCursos([...listaCursos,
         {
@@ -70,6 +70,21 @@ const CursosRelevantes = () => {
         setDataInicio(dayjs())
         setDataTermino(dayjs())
         ativarDesativarModalAddCurso()
+    }
+
+
+    const modalEditarCurso = (id) =>{
+        const curso = listaCursos.find(curso=>{
+            return curso.id == id
+        })
+
+        setNovoCurso({
+            ...curso,   
+        })
+        setDataInicio(curso.dataInicio)
+        setDataTermino(curso.dataConclusao)
+        setModalFormEditarCurso(!modalFormEditarCurso)
+
     }
 
 
@@ -107,6 +122,7 @@ const CursosRelevantes = () => {
                 Alterar
             </Button>
 
+
             {
                 modalCursos &&
                 <Modal close={() => setModalCursos(!modalCursos)} blockScroll={modalCursos}>
@@ -117,9 +133,9 @@ const CursosRelevantes = () => {
                         listaCursos?.map((curso, i) => (
                             <div className="w-full flex flex-col items-start" key={i}>
                                 <h3 className='font-bold'>{curso.nomeDoCurso}</h3>
-                                <p>{curso.instituição}</p>
+                                <p>{curso.instituicao}</p>
                                 <div className="w-full flex ">
-                                    <IconButton aria-label="delete" onClick={ativarDesativarModalAddCurso}>
+                                    <IconButton aria-label="delete" onClick={()=>modalEditarCurso(curso.id)} >
                                         <EditIcon />
                                     </IconButton>
                                     <IconButton aria-label="delete" >
@@ -130,13 +146,17 @@ const CursosRelevantes = () => {
                             </div>
                         ))
                     }
+                    <Button variant="outlined" size="small" onClick={ativarDesativarModalAddCurso}>
+                        <AddIcon />
+                        Adicionar
+                    </Button>
                 </Modal>
             }
             {
                 modalFormAddCurso &&
-                <ModalForm close={ativarDesativarModalAddCurso} acao={AdicionarNovoCurso} blockScroll={modalFormAddCurso}>
+                <ModalForm close={ativarDesativarModalAddCurso} acao={adicionarNovoCurso} blockScroll={modalFormAddCurso}>
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
-                        Adicionar Cursos
+                        Adicionar Curso
                     </h2>
                     <TextField
                         id="curso"
@@ -157,6 +177,44 @@ const CursosRelevantes = () => {
                         label="Descricao"
                         variant="outlined"
                         value={novoCurso.cidade}
+                        onChange={(e) => setDadosFormulario('descricao', e.target.value, setNovoCurso, novoCurso)}
+                    />
+                    <Box >
+                        <BasicDatePicker
+                            valorInicio={dataInicio}
+                            valorTermino={dataTermino}
+                            changeInicio={(newValue) => setDataInicio(newValue)}
+                            changeTermino={(newValue) => setDataTermino(newValue)}
+                        />
+                    </Box>
+                    <RadioButtonsGroup andamento={andamentoCurso} change={() => setAndamentoCurso(!andamentoCurso)} />
+                </ModalForm>
+            }
+            {
+                modalFormEditarCurso &&
+                <ModalForm close={()=>setModalFormEditarCurso(!modalFormEditarCurso)} blockScroll={modalFormEditarCurso}>
+                    <h2 className="text-2xl  font-bold  text-sky-700 ">
+                        Editar Curso
+                    </h2>
+                    <TextField
+                        id="curso"
+                        label="Curso"
+                        variant="outlined"
+                        value={novoCurso.nomeDoCurso}
+                        onChange={(e) => setDadosFormulario('nomeDoCurso', e.target.value, setNovoCurso, novoCurso)}
+                    />
+                    <TextField
+                        id="instituicao"
+                        label="Instituição"
+                        variant="outlined"
+                        value={novoCurso.instituicao}
+                        onChange={(e) => setDadosFormulario('instituicao', e.target.value, setNovoCurso, novoCurso)}
+                    />
+                    <TextField
+                        id="descricao"
+                        label="Descricao"
+                        variant="outlined"
+                        value={novoCurso.descricao}
                         onChange={(e) => setDadosFormulario('descricao', e.target.value, setNovoCurso, novoCurso)}
                     />
                     <Box >
