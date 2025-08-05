@@ -76,7 +76,7 @@ const CursosRelevantes = () => {
         setDataTermino(dayjs())
     }
 
-    const modalEditarCurso = (id) => {
+    const ativarmodalEditarCurso = (id) => {
         const curso = listaCursos.find(curso => {
             return curso.id == id
         })
@@ -87,7 +87,6 @@ const CursosRelevantes = () => {
         setDataInicio(curso.dataInicio)
         setDataTermino(curso.dataConclusao)
         setModalFormEditarCurso(!modalFormEditarCurso)
-        limparForm()
 
     }
 
@@ -139,7 +138,7 @@ const CursosRelevantes = () => {
                                 <h3 className='font-bold'>{curso.nomeDoCurso}</h3>
                                 <p>{curso.instituicao}</p>
                                 <div className="w-full flex ">
-                                    <IconButton aria-label="delete" onClick={() => modalEditarCurso(curso.id)} >
+                                    <IconButton aria-label="delete" onClick={() => ativarmodalEditarCurso(curso.id)} >
                                         <EditIcon />
                                     </IconButton>
                                     <IconButton aria-label="delete" >
