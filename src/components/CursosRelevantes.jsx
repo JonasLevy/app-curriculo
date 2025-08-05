@@ -60,6 +60,11 @@ const CursosRelevantes = () => {
             dataInicio: dataInicio,
             dataConclusao: dataTermino,
         }])
+        limparForm()
+        ativarDesativarModalAddCurso()
+    }
+
+    const limparForm = () => {
         setNovoCurso({
             id: '',
             nomeDoCurso: "",
@@ -69,21 +74,20 @@ const CursosRelevantes = () => {
         })
         setDataInicio(dayjs())
         setDataTermino(dayjs())
-        ativarDesativarModalAddCurso()
     }
 
-
-    const modalEditarCurso = (id) =>{
-        const curso = listaCursos.find(curso=>{
+    const modalEditarCurso = (id) => {
+        const curso = listaCursos.find(curso => {
             return curso.id == id
         })
 
         setNovoCurso({
-            ...curso,   
+            ...curso,
         })
         setDataInicio(curso.dataInicio)
         setDataTermino(curso.dataConclusao)
         setModalFormEditarCurso(!modalFormEditarCurso)
+        limparForm()
 
     }
 
@@ -135,7 +139,7 @@ const CursosRelevantes = () => {
                                 <h3 className='font-bold'>{curso.nomeDoCurso}</h3>
                                 <p>{curso.instituicao}</p>
                                 <div className="w-full flex ">
-                                    <IconButton aria-label="delete" onClick={()=>modalEditarCurso(curso.id)} >
+                                    <IconButton aria-label="delete" onClick={() => modalEditarCurso(curso.id)} >
                                         <EditIcon />
                                     </IconButton>
                                     <IconButton aria-label="delete" >
@@ -192,7 +196,7 @@ const CursosRelevantes = () => {
             }
             {
                 modalFormEditarCurso &&
-                <ModalForm close={()=>setModalFormEditarCurso(!modalFormEditarCurso)} blockScroll={modalFormEditarCurso}>
+                <ModalForm close={() => setModalFormEditarCurso(!modalFormEditarCurso)} blockScroll={modalFormEditarCurso}>
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
                         Editar Curso
                     </h2>
