@@ -60,8 +60,23 @@ const CursosRelevantes = () => {
             dataInicio: dataInicio,
             dataConclusao: dataTermino,
         }])
-        limparForm()
         ativarDesativarModalAddCurso()
+        limparForm()
+    }
+
+    const salvarEdicao = (e)=>{
+        e.preventDefault()
+
+        const novaListadeCurso = listaCursos.map(curso=>{
+            if(curso.id = novoCurso.id){
+                return novoCurso
+            }else{
+                return curso
+            }
+        })
+
+        setListaCursos(novaListadeCurso)
+        setModalFormEditarCurso(!modalFormEditarCurso)
     }
 
     const limparForm = () => {
@@ -195,7 +210,10 @@ const CursosRelevantes = () => {
             }
             {
                 modalFormEditarCurso &&
-                <ModalForm close={() => setModalFormEditarCurso(!modalFormEditarCurso)} blockScroll={modalFormEditarCurso}>
+                <ModalForm close={() => setModalFormEditarCurso(!modalFormEditarCurso)} 
+                blockScroll={modalFormEditarCurso}
+                acao={salvarEdicao}
+                >
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
                         Editar Curso
                     </h2>

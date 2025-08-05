@@ -109,7 +109,7 @@ const FormacaoAcademica = () => {
         setFormacoes(novoArray)
     }
     const bodyElement = document.body;
-    if(!modal) bodyElement.style.overflow=''
+    if (!modal) bodyElement.style.overflow = ''
 
 
     return (
@@ -159,7 +159,7 @@ const FormacaoAcademica = () => {
             {modalForm &&
                 <ModalForm close={() => ativarModalForm()} acao={inserirNovaFormacao} blockScroll={modalForm}>
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
-                       Adicionar Formação Acadêmica
+                        Adicionar Formação Acadêmica
                     </h2>
                     <TextField
                         id="curso"
@@ -194,7 +194,10 @@ const FormacaoAcademica = () => {
                 </ModalForm>
             }
             {modalFormEditar &&
-                <ModalForm close={() => ativarModalFormEditar()} acao={salvarAlteracao}blockScroll={modalFormEditar}>
+                <ModalForm close={() => ativarModalFormEditar()}
+                    acao={salvarAlteracao}
+                    blockScroll={modalFormEditar}
+                >
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
                         Formação Acadêmica
                     </h2>
