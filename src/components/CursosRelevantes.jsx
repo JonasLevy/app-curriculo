@@ -17,14 +17,14 @@ const CursosRelevantes = () => {
     const [modalFormAddCurso, setModalFormAddCurso] = useState(false)
     const [modalFormEditarCurso, setModalFormEditarCurso] = useState(false)
     const [dataInicio, setDataInicio] = useState(dayjs())
-    const [dataTermino, setDataTermino] = useState(dayjs())
+    const [dataConclusao, setDataConclusao] = useState(dayjs())
     const [andamentoCurso, setAndamentoCurso] = useState(false)
     const [listaCursos, setListaCursos] = useState([
         {
             id: uuidv4(),
             nomeDoCurso: "Bootcamp Desenvolvedor Web Full Stack",
             instituicao: "Labenu",
-            descricao: "Programa com mais de 1000 horas de experiência prática em desenvolvimento Full Stack, utilizando metodologias ágeis (Scrum e Kanban). Conteúdo abordado:",
+            descricao: "Programa com mais de 1000 horas de experiência prática em desenvolvimento Full Stack, utilizando metodologias ágeis (Scrum e Kanban)",
             conteudos: ["Frontend: HTML, CSS, JavaScript, React, Styled-Components, React Hooks, consumo de APIs REST, HTTP", "Backend: Node.js, Knex, TypeScript, MySQL, SQL, Firebase", "Ferramentas e Testes: Git, GitHub, AWS, Jest, testes unitários"],
             dataInicio: dayjs(),
             dataConclusao: dayjs()
@@ -57,25 +57,35 @@ const CursosRelevantes = () => {
         {
             ...novoCurso,
             id: uuidv4,
-            dataInicio: dataInicio,
-            dataConclusao: dataTermino,
+            dataInicio,
+            dataConclusao
         }])
         ativarDesativarModalAddCurso()
         limparForm()
     }
 
-    const salvarEdicao = (e)=>{
+    const salvarEdicao = (e) => {
         e.preventDefault()
 
-        const novaListadeCurso = listaCursos.map(curso=>{
-            if(curso.id = novoCurso.id){
-                return novoCurso
-            }else{
+        const novaListadeCurso = listaCursos.map(curso => {
+            if (curso.id = novoCurso.id) {
+                return {
+                    ...novoCurso,
+                    dataConclusao,
+                    dataInicio
+                }
+            } else {
                 return curso
             }
         })
 
         setListaCursos(novaListadeCurso)
+        setModalFormEditarCurso(!modalFormEditarCurso)
+        limparForm()
+    }
+
+    const cancelarEdicao = () => {
+        limparForm()
         setModalFormEditarCurso(!modalFormEditarCurso)
     }
 
@@ -88,7 +98,7 @@ const CursosRelevantes = () => {
             conteudos: [],
         })
         setDataInicio(dayjs())
-        setDataTermino(dayjs())
+        setDataConclusao(dayjs())
     }
 
     const ativarmodalEditarCurso = (id) => {
@@ -100,9 +110,16 @@ const CursosRelevantes = () => {
             ...curso,
         })
         setDataInicio(curso.dataInicio)
-        setDataTermino(curso.dataConclusao)
+        setDataConclusao(curso.dataConclusao)
         setModalFormEditarCurso(!modalFormEditarCurso)
 
+    }
+
+    const apagarFormacao = (id) => {
+        const novoArray = listaCursos.filter(formacao => {
+            return formacao.id != id
+        })
+        setListaCursos(novoArray)
     }
 
 
@@ -121,7 +138,10 @@ const CursosRelevantes = () => {
                             {mesesDoAno[(curso.dataConclusao).get("month")]}/{(curso.dataConclusao).get("year")})
                         </p>
                         <p className='text-left'>
-                            {curso.descricao}. Conteúdo abordado:
+                            {curso.descricao}.
+                        </p>
+                        <p className='text-left'>
+                            Conteúdo abordado:
                         </p>
                         <ul className='text-left list-disc ml-7'>
                             {
@@ -156,7 +176,7 @@ const CursosRelevantes = () => {
                                     <IconButton aria-label="delete" onClick={() => ativarmodalEditarCurso(curso.id)} >
                                         <EditIcon />
                                     </IconButton>
-                                    <IconButton aria-label="delete" >
+                                    <IconButton aria-label="delete" onClick={() => apagarFormacao(curso.id)} >
                                         <DeleteIcon />
                                     </IconButton>
                                 </div>
@@ -200,9 +220,9 @@ const CursosRelevantes = () => {
                     <Box >
                         <BasicDatePicker
                             valorInicio={dataInicio}
-                            valorTermino={dataTermino}
+                            valorTermino={dataConclusao}
                             changeInicio={(newValue) => setDataInicio(newValue)}
-                            changeTermino={(newValue) => setDataTermino(newValue)}
+                            changeTermino={(newValue) => setDataConclusao(newValue)}
                         />
                     </Box>
                     <RadioButtonsGroup andamento={andamentoCurso} change={() => setAndamentoCurso(!andamentoCurso)} />
@@ -210,9 +230,9 @@ const CursosRelevantes = () => {
             }
             {
                 modalFormEditarCurso &&
-                <ModalForm close={() => setModalFormEditarCurso(!modalFormEditarCurso)} 
-                blockScroll={modalFormEditarCurso}
-                acao={salvarEdicao}
+                <ModalForm close={cancelarEdicao}
+                    blockScroll={modalFormEditarCurso}
+                    acao={salvarEdicao}
                 >
                     <h2 className="text-2xl  font-bold  text-sky-700 ">
                         Editar Curso
@@ -241,9 +261,9 @@ const CursosRelevantes = () => {
                     <Box >
                         <BasicDatePicker
                             valorInicio={dataInicio}
-                            valorTermino={dataTermino}
+                            valorTermino={dataConclusao}
                             changeInicio={(newValue) => setDataInicio(newValue)}
-                            changeTermino={(newValue) => setDataTermino(newValue)}
+                            changeTermino={(newValue) => setDataConclusao(newValue)}
                         />
                     </Box>
                     <RadioButtonsGroup andamento={andamentoCurso} change={() => setAndamentoCurso(!andamentoCurso)} />

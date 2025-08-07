@@ -43,6 +43,7 @@ const FormacaoAcademica = () => {
     ];
 
     const ativarModalForm = () => {
+        limparForm()
         setModal(!modal)
         setModalForm(!modalForm)
     }
@@ -52,14 +53,6 @@ const FormacaoAcademica = () => {
         setModalForm(!modalForm)
         setModalFormEditar(!modalFormEditar)
         setNovaFormacao(formacoes[i])
-    }
-
-    const setDadosFormulario = (key, value) => {
-        const dadosDoForm = {
-            ...novaFormacao,
-            [key]: value
-        }
-        setNovaFormacao(dadosDoForm)
     }
 
     const limparForm = () => {
@@ -74,6 +67,14 @@ const FormacaoAcademica = () => {
         })
         setDataInicio(dayjs())
         setDataTermino(dayjs())
+    }
+
+    const setDadosFormulario = (key, value) => {
+        const dadosDoForm = {
+            ...novaFormacao,
+            [key]: value
+        }
+        setNovaFormacao(dadosDoForm)
     }
 
     const inserirNovaFormacao = (e) => {
@@ -100,6 +101,11 @@ const FormacaoAcademica = () => {
         setFormacoes(arrayFormacoes)
         ativarModalFormEditar()
         console.log(formacoes)
+    }
+
+    const cancelarEdicao = ()=>{
+        limparForm()
+        modalFormEditar(!modalFormEditar)
     }
 
     const apagarFormacao = (id) => {
@@ -194,7 +200,7 @@ const FormacaoAcademica = () => {
                 </ModalForm>
             }
             {modalFormEditar &&
-                <ModalForm close={() => ativarModalFormEditar()}
+                <ModalForm close={cancelarEdicao}
                     acao={salvarAlteracao}
                     blockScroll={modalFormEditar}
                 >
