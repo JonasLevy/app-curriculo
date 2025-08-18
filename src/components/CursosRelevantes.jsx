@@ -269,14 +269,25 @@ const CursosRelevantes = () => {
                     <RadioButtonsGroup andamento={andamentoCurso} change={() => setAndamentoCurso(!andamentoCurso)} />
                     <div className="">
                         <p>Conteudos abordados:</p>
+                        <div className="gap-2  flex flex-col">
                         {
                             novoCurso.conteudos?.map(conteudo => {
                                 return (
-                                    <div>
-                                        {conteudo}
+                                    <div className=" border border-sky-500 p-1 gap-0">
+                                        <p className="">
+                                            {conteudo}
+                                        </p>
+                                        <IconButton className="p-0 m-0" aria-label="delete" >
+                                            <EditIcon />
+                                        </IconButton>
+                                        <IconButton aria-label="delete"  >
+                                            <DeleteIcon />
+                                        </IconButton>
                                     </div>)
+                                    "fiz adições nos conteudos, adicionei os botoes de editar e excluir(não estão funcionando ainda"
                             })
                         }
+                        </div>
                     </div>
                 </ModalForm>
             }
