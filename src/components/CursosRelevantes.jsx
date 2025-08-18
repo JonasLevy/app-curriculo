@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, TextField } from "@mui/material"
+import { Box, Button, IconButton, List, ListItem, TextField } from "@mui/material"
 import dayjs from "dayjs"
 import { useState } from "react"
 import Modal from "./Modal"
@@ -267,6 +267,17 @@ const CursosRelevantes = () => {
                         />
                     </Box>
                     <RadioButtonsGroup andamento={andamentoCurso} change={() => setAndamentoCurso(!andamentoCurso)} />
+                    <div className="">
+                        <p>Conteudos abordados:</p>
+                        {
+                            novoCurso.conteudos?.map(conteudo => {
+                                return (
+                                    <div>
+                                        {conteudo}
+                                    </div>)
+                            })
+                        }
+                    </div>
                 </ModalForm>
             }
         </section>
