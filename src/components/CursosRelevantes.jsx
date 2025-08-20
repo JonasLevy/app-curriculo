@@ -267,26 +267,37 @@ const CursosRelevantes = () => {
                         />
                     </Box>
                     <RadioButtonsGroup andamento={andamentoCurso} change={() => setAndamentoCurso(!andamentoCurso)} />
-                    <div className="">
+                    <div className="gap-2  flex flex-col">
                         <p>Conteudos abordados:</p>
-                        <div className="gap-2  flex flex-col">
                         {
                             novoCurso.conteudos?.map(conteudo => {
                                 return (
-                                    <div className=" border border-sky-500 p-1 gap-0">
+                                    <div className="shadow-md drop-shadow-sm rounded-md p-1 ">
                                         <p className="">
                                             {conteudo}
                                         </p>
-                                        <IconButton className="p-0 m-0" aria-label="delete" >
+                                        <IconButton className="p-0 m-0" aria-label="edit" >
                                             <EditIcon />
                                         </IconButton>
                                         <IconButton aria-label="delete"  >
                                             <DeleteIcon />
                                         </IconButton>
                                     </div>)
-                                    "fiz adições nos conteudos, adicionei os botoes de editar e excluir(não estão funcionando ainda"
                             })
                         }
+                        <div className="flex flex-col ">
+                            <TextField
+                                id="cursosRelenantes"
+                                label="Curso Relevante"
+                                variant="outlined"
+                                value={''}
+                            // onChange={(e) => setDadosFormulario('descricao', e.target.value, setNovoCurso, novoCurso)}
+                            />
+                            <Button variant="outlined" size="small" >
+                                <AddIcon />
+                                Adicionar Curso
+                            </Button>
+
                         </div>
                     </div>
                 </ModalForm>
